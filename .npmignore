@@ -1,0 +1,9 @@
+*.ts
+!*.d.ts
+
+src/*
+index.html
+.fileheader.js
+project.yaml
+tsconfig.json
+webpack.config.js

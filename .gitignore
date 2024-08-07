@@ -1,0 +1,4 @@
+node_modules/
+/examples/*.js*
+/project.yaml
+/test.js*
