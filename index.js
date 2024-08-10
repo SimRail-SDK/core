@@ -52,7 +52,7 @@ class Sdk {
 }
 exports.Sdk = Sdk;
 (function (Sdk) {
-    Sdk.VERSION = "0.1.0";
+    Sdk.VERSION = "0.1.1";
     Sdk.Api = api_1.default;
     Sdk.Server = server_1.default;
     Sdk.Station = station_1.default;

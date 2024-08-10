@@ -30,6 +30,8 @@ or a custom one, check out the example [Providing a (custom) API or Core API cla
 
         - [Automatic updates and events][automatic-updates-and-events]
 
+        - [TypeScript strict type checking][typescript-strict-type-checking]
+
         - [Working with result caching][working-with-result-caching]
 
         - [Providing a (custom) API or Core API class][providing-a-custom-api-or-core-api-class]
@@ -170,7 +172,7 @@ const speed = t4144.liveData.speed;
 [automatic-updates-and-events]: #automatic-updates-and-events "View Automatic updates and events"
 
 ```TypeScript
-import Sdk from "../";
+import Sdk from "@simrail-sdk/core";
 
 const sdk = new Sdk(...);
 
@@ -226,6 +228,39 @@ train.liveData.autoUpdate = true;
 
 // And clean up
 timetableSubscription.unsubscribe();
+```
+<br/>
+<br/>
+
+
+#### [TypeScript strict type checking][typescript-strict-type-checking]
+
+[typescript-strict-type-checking]: #typescript-strict-type-checking "View TypeScript strict type checking"
+
+To enable strict type checking when using TypeScript, install a
+  *Core Setup* module like [`@simrail-sdk/core-setup-pl`](https://github.com/simrail-sdk/core-setup-pl "View on GitHub").
+
+
+```TypeScript
+import Sdk from "@simrail-sdk/core";
+import { Server, Station, Types } from "@simrail-sdk/core-setup-pl";
+
+// Inject `Types` into the `Sdk` instance to enable strict type checking.
+const sdk = new Sdk<Types>(...);
+
+const en1 = sdk.server(Server.Code.EN1);
+const en2 = sdk.server("en2");
+
+const będzin     = sdk.station("en1", Station.Code.B);
+const düsseldorf = sdk.station("en1", "Dü"); // <-- Fails because Düsseldorf doesn't exist.
+const katowice   = sdk.station("en1", "KO");
+
+const train4144 = sdk.train("en1", "4144");
+const train4145 = sdk.train("en1", "4145"); // <-- Fails because 4145 doesn't exist.
+
+// Obtaining a list of server/station codes:
+const serverCodes  = Object.values(Server.Code);
+const stationCodes = Object.values(Station.Code);
 ```
 <br/>
 <br/>
@@ -311,11 +346,11 @@ import Sdk from "@simrail-sdk/core";
 
 // By default the SDK will use the API class from package `@simrail-sdk/api`.
 // To provide another API class or a custom one, just include the instance in the SDK config.
-const api = new Api({ endpoints });
+const api = new Api(...);
 const sdk = new Sdk({ api }); // <-- Inject API here
 
 // Or alternatively, to provide a different *Core API* class, include this in the API config.
-const coreApi = new CoreApi({ endpoints });
+const coreApi = new CoreApi(...);
 const api     = new Api({ core: coreApi }); // <-- Inject Core API here
 const sdk     = new Sdk({ api: api });      // <-- Inject API here
 
@@ -1961,7 +1996,7 @@ Method to retrieve a `Train` instance related to a server.
 
 **Since**: `0.1.0`
 
-**Definition**:&nbsp;&nbsp;[index.ts:118][api-reference-index.ts]
+**Definition**:&nbsp;&nbsp;[index.ts:120][api-reference-index.ts]
 
 <br/>
 
@@ -3305,7 +3340,7 @@ Specifies the version of the SDK.
 
 **Since**: `0.1.0`
 
-**Definition**:&nbsp;&nbsp;[index.ts:127][api-reference-index.ts]
+**Definition**:&nbsp;&nbsp;[index.ts:129][api-reference-index.ts]
 
 <br/>
 <br/>
@@ -7210,7 +7245,7 @@ Package name: `@simrail-sdk/core`
 
 Author: [Niek van Bennekom](https://github.com/niekvb "View GitHub profile")
 
-Version: `0.1.0`
+Version: `0.1.1`
 
 Repository: [`github:simrail-sdk/core` (origin)](https://github.com/simrail-sdk/core.git "View on github")
 
@@ -7244,7 +7279,9 @@ Keywords: `simrail`, `sdk`, `core`.
 <br/>
 
 
-**Development packages**: (2)
+**Development packages**: (3)
+
+- `@simrail-sdk/core-setup-pl`: SimRail Core SDK Setup - Poland.
 
 - `@types/node`: TypeScript definitions for node.
 
@@ -7294,9 +7331,9 @@ Dependency tree:
 
 | File type | Number of files | Lines with code | Lines with comments | Blank lines |
 | --------- | --------------- | --------------- | ------------------- | ----------- |
-| Markdown | 3 | 4967 | 0 | 3633 |
-| TypeScript | 24 | 1860 | 1729 | 591 |
-| JavaScript | 15 | 1194 | 15 | 0 |
-| JSON | 3 | 131 | 0 | 1 |
-| YAML | 1 | 44 | 3 | 3 |
-| **All (total)** | **46** | **8196** | **1747** | **4228** |
+| Markdown | 3 | 6035 | 0 | 4154 |
+| TypeScript | 24 | 1871 | 1718 | 593 |
+| JavaScript | 15 | 1205 | 15 | 0 |
+| JSON | 3 | 139 | 0 | 1 |
+| YAML | 1 | 50 | 3 | 3 |
+| **All (total)** | **46** | **9300** | **1736** | **4751** |

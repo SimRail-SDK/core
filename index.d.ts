@@ -8,7 +8,7 @@
  *
  * @author  Niek van Bennekom
  * @since   0.1.0
- * @version 0.1.0
+ * @version 0.1.1
  *
  * @requires [at]simrail-sdk/api
  */
@@ -86,8 +86,10 @@ export class Sdk<Types extends Sdk.Types> {
      * @param serverCode  - The unique code of the server.
      * @param trainNumber - The national or local number of the train.
      * @returns The `Train` instance.
+     *
+     * @version 0.1.1
      */
-    public train<ServerCode extends Types["serverCodes"], TrainNumber extends Sdk.Train.Number>(serverCode: ServerCode, trainNumber: TrainNumber): Promise<Sdk.Train<Types & { serverCode: ServerCode, trainNumber: TrainNumber }>>;
+    public train<ServerCode extends Types["serverCodes"], TrainNumber extends Types["trainNumbers"]>(serverCode: ServerCode, trainNumber: TrainNumber): Promise<Sdk.Train<Types & { serverCode: ServerCode, trainNumber: TrainNumber }>>;
 
 }
 

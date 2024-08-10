@@ -1,3 +1,4 @@
+import * as Setup from "@simrail-sdk/core-setup-pl";
 import Sdk from ".";
 
 const endpoints: Sdk.Api.Endpoints = {
@@ -24,7 +25,7 @@ const apiConfig: Omit<Sdk.Api.Config, "base"> = {
 
 const core = new Sdk.Api.Core({ endpoints });
 const api  = new Sdk.Api({ core, ...apiConfig });
-const sdk  = new Sdk({ api });
+const sdk  = new Sdk<Setup.Types>({ api });
 
 
 (async () => {

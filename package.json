@@ -1,6 +1,6 @@
 {
   "name": "@simrail-sdk/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SimRail Core SDK",
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "author": "Niek van Bennekom",
   "license": "See LICENSE.md",
   "devDependencies": {
+    "@simrail-sdk/core-setup-pl": "^0.1.1",
     "@types/node": "^22.1.0",
     "typescript": "^5.5.4"
   },
